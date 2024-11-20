@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "Exercise 1",
+      "run": "pytest test_lab7_1.py",
+      "points": 1
+    },
+    {
+      "name": "Exercise 2",
+      "run": "pytest test_lab7_2.py",
+      "points": 1
+    },
+    {
+      "name": "Exercise 3",
+      "run": "pytest test_lab7_3.py",
+      "points": 1
+    },
+    {
+      "name": "Exercise 4",
+      "run": "pytest test_lab7_4.py",
+      "points": 1
+    },
+    {
+      "name": "Exercise 5",
+      "run": "pytest test_lab7_5.py",
+      "points": 1
+    }
+  ]
+}
