@@ -1,27 +1,28 @@
 import json
 from datetime import datetime
 import pytz
+from typing import Dict, List
 
-# Wykorzystując countries.json podaj aktualną godzinę we
-# wszystkich krajach, wyświetlając je zgrupowane względem kontynentów
-
-
-# Open JSON
-with open('countries.json') as file:
-    countries = json.load(file)
-
-def get_current_time_in_countries(countries):
+def get_current_time_in_countries(countries: List[Dict]) -> Dict[str, Dict[str, str]]:
     """
     Get the current time in each country, grouped by continent.
+    
+    Args:
+        countries (List[Dict]): List of country dictionaries containing timezone and continent info
+        
+    Returns:
+        Dict[str, Dict[str, str]]: Dictionary with continent as key and nested dictionary of 
+        country names and their current times as values
+        
+    Example:
+        {
+            'Europe': {
+                'United Kingdom': '14:30:45',
+                'France': '15:30:45'
+            },
+            'Asia': {
+                'Japan': '22:30:45'
+            }
+        }
     """
     pass
-
-# Get the current time in each country grouped by continent
-current_times = get_current_time_in_countries(countries)
-
-# Display the result
-for continent, times in current_times.items():
-    print(f"Continent: {continent}")
-    for country, time in times.items():
-        print(f"  {country}: {time}")
-    print("\n")

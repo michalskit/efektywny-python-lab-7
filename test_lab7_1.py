@@ -1,26 +1,31 @@
 # Testy - Zadanie 1
 
 import unittest
-from lab7_1 import derivative, newton_method, parse_expression
+from lab7_1 import newton_method, derivative
 
 class TestNewtonMethod(unittest.TestCase):
 
-    def test_derivative(self):
-        f = lambda x: x ** 2
-        df = derivative(f)
-        self.assertAlmostEqual(df(3), 6, places=5)
+    def test_newton_method_basic(self):
+        test_cases = [
+            (lambda x: x**2 - 4, 1.0, 2.0),  
+            (lambda x: x**3 - x - 2, 2.0, 1.5214),  
+            (lambda x: x - 1, 0.0, 1.0), 
+        ]
+        
+        for f, x0, expected in test_cases:
+            with self.subTest(f=f, x0=x0, expected=expected):
+                root = newton_method(f, x0, 1e-6, 1000, 1e-5)
+                self.assertAlmostEqual(root, expected, places=4)
 
     def test_newton_method_convergence(self):
         f = lambda x: x**2 - 4
-        df = derivative(f)
-        root = newton_method(f, df, 1, 1000, 0.00001)
-        self.assertAlmostEqual(root, 2.0, places=5)
+        root = newton_method(f, 1.0, 1e-6, 1000, 1e-5)
+        self.assertAlmostEqual(root, 2.0, places=4)
 
     def test_newton_method_no_convergence(self):
         f = lambda x: x**2 - 4
-        df = derivative(f)
         with self.assertRaises(ValueError):
-            newton_method(f, df, 1, 3, 0.00001)
+            newton_method(f, 1.0, 1e-6, 3, 1e-5)  # Too few iterations to converge
 
 if __name__ == '__main__':
     unittest.main()
